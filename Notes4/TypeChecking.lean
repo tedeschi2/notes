@@ -67,7 +67,6 @@ variable (a₀ : α)
 
 #check a₀  
 
-variable { β : Type } (f : α → β) 
 
 #check f a₀  -- good 
 
@@ -108,20 +107,20 @@ example : Nat := 0
 example : Int := 0 
 example : Float := 0.0 
 example : Bool := true 
-example : Char := ⟨0,(by simp)⟩  
+example : Char := ⟨0,(by simp)⟩
 
 /-
 A generic type build from base types by making function may 
 not have a term. 
 -/
 -- Can you fill this in? 
-example : α → β := sorry 
+example : α → β := sorry
 
 -- How about 
-example : α → α := sorry 
+example : α → α := fun a => a
 
 -- Or 
-example : α → β → α := sorry 
+example : α → (β → α) := fun a _ => a 
 
 /-
 Let's look a more general algorithm in a more complex 
@@ -157,8 +156,17 @@ def done : (α → β → γ) → (α → β) → α → γ :=
 
 -- Some more examples 
 
-example : (α → γ) → (δ → β) → (γ → T) → (β → γ) → δ → ε := sorry 
+example : (α → γ) → (δ → β) → (γ → ε) → (β → γ) → δ → ε := sorry 
+--Let f : (α → γ)
+--Let g : (δ → β)
+--Let k : (γ → ε)
+--Let m : (β → γ)
+--Let r : δ
 
-example : (((α → β) → β) → β) → (α → β) := sorry 
+example : (α → γ) → (δ → β) → (γ → ε) → (β → γ) → δ → ε := 
+fun _ g k m r => (k (m (g r)))
+
+
+example : (((α → β) → β) → β) → (α → β) := fun f a => f (fun g => g a)
 
 example : ((β → α) → α) → (β → γ) → (γ → α) → α := sorry 
