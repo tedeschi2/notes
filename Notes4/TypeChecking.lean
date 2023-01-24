@@ -8,6 +8,7 @@ in the context of simple type theory.
 We have typing conclusions called _judgements_ or _inferences_ and 
 rules for building those judgements. 
 
+
 A typing judgement always takes place in the presence of a 
 _local context_ C. You can think of this as the current scope in 
 the program. The local context keeps track of the current 
@@ -25,7 +26,7 @@ type τ.
 
 The rules for deriving typing judgement are 
 
-Typing rules:
+Typing rules: 
 
   —————————— Cst   if c is declared with type σ
   C ⊢ c : σ
@@ -67,6 +68,7 @@ variable (a₀ : α)
 
 #check a₀  
 
+variable { β : Type } (f : α → β) 
 
 #check f a₀  -- good 
 
@@ -117,10 +119,10 @@ not have a term.
 example : α → β := sorry
 
 -- How about 
-example : α → α := fun a => a
+example : α → α := sorry 
 
 -- Or 
-example : α → (β → α) := fun a _ => a 
+example : α → β → α := sorry 
 
 /-
 Let's look a more general algorithm in a more complex 
@@ -156,17 +158,9 @@ def done : (α → β → γ) → (α → β) → α → γ :=
 
 -- Some more examples 
 
-example : (α → γ) → (δ → β) → (γ → ε) → (β → γ) → δ → ε := sorry 
---Let f : (α → γ)
---Let g : (δ → β)
---Let k : (γ → ε)
---Let m : (β → γ)
---Let r : δ
+example : (α → γ) → (δ → β) → (γ → T) → (β → γ) → δ → ε := sorry 
 
-example : (α → γ) → (δ → β) → (γ → ε) → (β → γ) → δ → ε := 
-fun _ g k m r => (k (m (g r)))
-
-
-example : (((α → β) → β) → β) → (α → β) := fun f a => f (fun g => g a)
+example : (((α → β) → β) → β) → (α → β) := sorry 
 
 example : ((β → α) → α) → (β → γ) → (γ → α) → α := sorry 
+
