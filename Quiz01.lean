@@ -1,4 +1,4 @@
-/-
+
 Quiz 1 
 
 inductive Weekday (day : String) where
@@ -13,5 +13,3 @@ inductive Weekday (day : String) where
 def Weekday.odds : Weekday → String
 
 #print Weekday
-
--/

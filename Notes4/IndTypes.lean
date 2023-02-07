@@ -49,7 +49,7 @@ inductive Example where
  | Y (eg : Example) 
 
 example : Example.X (Example.Y base) = Example.Y (Example.X base) := by 
-  rfl 
+  sorry 
 
 -- Here is List
 inductive List (α : Type) where 
