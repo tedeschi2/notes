@@ -3,6 +3,7 @@ import Mathlib.Tactic.Cases
 import Notes4.IndTypes
 /- 
 Induction with Inductive Types
+
 Let's see a bit how how induction is called inductive types. 
 For each inductive type, recursors are automatically instantiated. 
 -/
@@ -19,10 +20,13 @@ example (a b c: ℕ) : exp (a*b) c = (exp a c) * exp b c := by
     ac_rfl
 
 /-
+
 Using the recusors directly is not as ergnomic as some built in tactics 
 of which there are few.
+
 First, we have already seen that `match` can be used to argue via 
 induction. 
+
 Let's prove that our exponentiation function on ℕ is multiplicative in 
 the base. 
 -/
@@ -36,9 +40,12 @@ theorem mul_of_mul_base_exp (a b c : ℕ) : exp (a*b) c = (exp a c) * exp b c :=
     ac_rfl
 
 /-
+
 In `mul_of_mul_base_exp`, we used induction at the step `rw [mul_of_mul_base_exp a b c]` 
 since this presumes a proof of `mul_of_mul_base_exp a b c`.
+
 Consider the following version using an anonymous `example`. 
+
 example (a b c: ℕ) : exp (a*b) c = (exp a c) * exp b c := by 
   match c with 
   | 0 => simp only [exp] 
@@ -46,7 +53,9 @@ example (a b c: ℕ) : exp (a*b) c = (exp a c) * exp b c := by
     simp only [exp,Nat.add] 
     -- how do we call the inductive step without a name?
     sorry 
+
 In this case, we can use `induction` or `induction'`. 
+
 -/
 
 variable {α : Type} 
@@ -79,6 +88,9 @@ example (n : ℕ) (l : List α) : n*(l.length) = (iterateAppend n l).length := b
     rw [indhyp]
     ac_rfl 
 
-example (n m : ℕ) : n*m = m*n := sorry 
+example (n m : ℕ) : n*m = m*n := by
+  match m with
+  | zero => sorry
+  | succ m' ih => sorry
 
 example (a n m : ℕ) : a*(m + n) = a*m + a*n := sorry 
